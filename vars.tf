@@ -2,14 +2,6 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-variable "PATH_TO_PRIVATE_KEY" {
-  default = "aws_key_2"
-}
-
-variable "PATH_TO_PUBLIC_KEY" {
-  default = "aws_key_2.pub"
-}
-
 variable "amis" {
   type = map(string)
   default = {
