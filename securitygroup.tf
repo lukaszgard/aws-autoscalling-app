@@ -1,29 +1,7 @@
-resource "aws_security_group" "allow-ssh" {
-  vpc_id      = var.VPC_MAIN_ID
-  name        = "ssh-terraform"
-  description = "security group that allows ssh and all egress traffic"
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  tags = {
-    Name = "ssh-terraform"
-  }
-}
-
-resource "aws_security_group" "allow-tls" {
-  name        = "allow-tls"
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
   description = "Allow TLS inbound traffic"
-  vpc_id      = var.VPC_MAIN_ID
+  vpc_id      = var.vpc_main
 
   ingress {
     description = "TLS from VPC"
@@ -45,10 +23,10 @@ resource "aws_security_group" "allow-tls" {
   }
 }
 
-resource "aws_security_group" "allow-http" {
-  name        = "allow-http"
+resource "aws_security_group" "allow_http" {
+  name        = "allow_http"
   description = "Allow HTTP inbound traffic"
-  vpc_id      = var.VPC_MAIN_ID
+  vpc_id      = var.vpc_main
 
   ingress {
     description = "TLS from VPC"

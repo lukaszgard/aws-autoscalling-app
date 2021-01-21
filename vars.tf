@@ -13,14 +13,14 @@ variable "INSTANCE_DEVICE_NAME" {
   default = "/dev/xvdh"
 }
 
-variable "VPC_MAIN_ID" {
+variable "vpc_main" {
   default = "vpc-04728a62510ab1ea8"
 }
 
-variable "SUBNET_ID_A" {
+variable "subnet_a" {
   default = "subnet-016f275f6354fa569"
 }
 
-variable "SUBNET_ID_B" {
+variable "subnet_b" {
   default = "subnet-09c7550a60a37fc44"
 }

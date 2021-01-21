@@ -1,19 +1,15 @@
-resource "aws_autoscaling_group" "autoscalling_group_terraform" {
-  name     = "Autoscalling_Group_Terraform"
+resource "aws_autoscaling_group" "alb_autoscalling_group" {
+  name     = "alb_autoscalling_group"
   max_size = 2
   min_size = 1
-  # desired_capacity          = 2
   health_check_grace_period = 300
   health_check_type         = "EC2"
   force_delete              = true
-  # placement_group           = aws_placement_group.placement_group.id
-  vpc_zone_identifier = [var.SUBNET_ID_A, var.SUBNET_ID_B]
-  # target_group_arns = []
-  # target_group_arns = [aws_alb.alb-terraform.arn]
+  vpc_zone_identifier = [var.subnet_a, var.subnet_b]
 
   launch_template {
-    id      = aws_launch_template.template_01.id
-    version = aws_launch_template.template_01.latest_version
+    id      = aws_launch_template.alb_autoscalling_app_template.id
+    version = aws_launch_template.alb_autoscalling_app_template.latest_version
   }
 
   instance_refresh {
@@ -26,7 +22,7 @@ resource "aws_autoscaling_group" "autoscalling_group_terraform" {
 }
 
 resource "aws_autoscaling_attachment" "asg_attachment" {
-  autoscaling_group_name = aws_autoscaling_group.autoscalling_group_terraform.id
-  alb_target_group_arn   = aws_alb_target_group.alb-target-group.arn
+  autoscaling_group_name = aws_autoscaling_group.alb_autoscalling_group.id
+  alb_target_group_arn   = aws_alb_target_group.alb_target_group.arn
 }
 
